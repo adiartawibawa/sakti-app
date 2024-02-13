@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Spatie\MediaLibrary\MediaCollections\Models\Concerns\HasUuid;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as ModelsMedia;
 
 class Media extends ModelsMedia
 {
-    use HasUuid;
+    use HasUuids;
 }

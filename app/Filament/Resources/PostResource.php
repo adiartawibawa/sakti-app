@@ -6,6 +6,7 @@ use App\Filament\Resources\PostResource\Pages;
 use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Post;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,27 +24,30 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
+                // Forms\Components\TextInput::make('slug')
+                //     ->required()
+                //     ->maxLength(255),
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('summary')
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('body')
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
-                Forms\Components\DateTimePicker::make('published_at'),
-                Forms\Components\FileUpload::make('featured_image')
-                    ->image(),
-                Forms\Components\FileUpload::make('featured_image_caption')
-                    ->image(),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
-                    ->required(),
-                Forms\Components\TextInput::make('meta'),
+                    ->label('Author')
+                    ->default(auth()->user()->name),
+                Forms\Components\RichEditor::make('body')
+                    ->maxLength(65535)
+                    ->columnSpanFull(),
+                Forms\Components\Textarea::make('summary')
+                    ->maxLength(65535),
+                Forms\Components\DateTimePicker::make('published_at')
+                    ->timezone('Asia/Makassar'),
+                SpatieMediaLibraryFileUpload::make('featured_image')
+                    ->collection('featured_image')
+                    ->columnSpanFull(),
+                Forms\Components\Textarea::make('featured_image_caption')
+                    ->label('Image Caption')
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('meta')->columnSpanFull(),
             ]);
     }
 
@@ -51,18 +55,11 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('ID')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('featured_image'),
-                Tables\Columns\ImageColumn::make('featured_image_caption'),
                 Tables\Columns\TextColumn::make('user.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
