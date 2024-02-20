@@ -51,6 +51,7 @@ class Post extends Model implements HasMedia
      */
     protected $appends = [
         'read_time',
+        'featured_image_url',
     ];
 
     /**
@@ -158,8 +159,8 @@ class Post extends Model implements HasMedia
             '%d %s %s',
             [
                 $minutes,
-                Str::plural(trans('canvas::app.min', [], optional(request()->user())->locale), $minutes),
-                trans('canvas::app.read', [], optional(request()->user())->locale),
+                Str::plural(trans('app.min', [], optional(request()->user())->locale), $minutes),
+                trans('app.read', [], optional(request()->user())->locale),
             ]
         );
     }
@@ -209,5 +210,10 @@ class Post extends Model implements HasMedia
             $post->tags()->detach();
             $post->topic()->detach();
         });
+    }
+
+    public function getFeaturedImageUrlAttribute()
+    {
+        return $this->getFirstMediaUrl('featured_image');
     }
 }

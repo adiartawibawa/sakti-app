@@ -32,7 +32,7 @@
 
 </head>
 
-<body class="antialiased">
+<body class="antialiased bg-indigo-50/60">
 
     {{ $slot }}
 

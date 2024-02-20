@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Pages\Articles\AllArticle;
+use App\Livewire\Pages\Articles\SingleArticle;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/artikel', AllArticle::class)->name('article.all');
+Route::get('/artikel/{slug}', SingleArticle::class)->name('article.single');

@@ -19,6 +19,10 @@ class Organization extends Model implements HasMedia
         'desc',
     ];
 
+    protected $appends = [
+        'organization_logo_url'
+    ];
+
     /**
      * Return the sluggable configuration array for this model.
      *
@@ -31,5 +35,10 @@ class Organization extends Model implements HasMedia
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function getOrganizationLogoUrlAttribute()
+    {
+        return $this->getFirstMediaUrl('organisasi');
     }
 }

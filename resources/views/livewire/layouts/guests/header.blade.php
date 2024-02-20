@@ -1,4 +1,4 @@
-<header class="bg-white" x-data="{ open: false }">
+<header class="bg-white shadow-sm" x-data="{ open: false }">
     <nav class="container relative flex items-center justify-between px-6 py-4 md:py-0 mx-auto text-indigo-800">
         <a href="#">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 md:w-10 md:h-10" fill="none" viewBox="0 0 24 24"
@@ -39,7 +39,7 @@
                 class="block hover:text-indigo-300 md:hover:text-indigo-800 transition-colors duration-300 md:px-6 md:hover:bg-indigo-300 md:py-6">
                 Prodi
             </a>
-            <a href="#"
+            <a href="{{ route('article.all') }}"
                 class="block hover:text-indigo-300 md:hover:text-indigo-800 transition-colors duration-300 md:px-6 md:hover:bg-indigo-300 md:py-6">
                 Kegiatan
             </a>
